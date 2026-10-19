@@ -1,0 +1,11 @@
+{
+  "name": "hmsk-kuendigung",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Write a German cancellation letter (Kündigung) with the deadline worked out. Static, no dependencies.",
+  "license": "MIT",
+  "scripts": {
+    "test": "node --test tests/",
+    "start": "python3 -m http.server 8080 --directory public"
+  }
+}

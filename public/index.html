@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kündigung schreiben: Vorlage mit Fristenrechner</title>
+<meta name="description" content="Kündigungsschreiben für Fitnessstudio, Handy, Internet, Versicherung, Streaming, Zeitung, Strom und Verein, mit Fristberechnung und Versandtipps. Im Browser, ohne Anmeldung.">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0B0F0C">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="app.css?v=1">
+</head>
+<body>
+
+<nav class="strip" aria-label="Site">
+  <div class="wrap strip__in">
+    <a class="strip__home" id="lnkHome" href="/de/tools/kuendigung/">&larr; hmsk.life</a>
+    <span class="strip__sp"></span>
+    <a id="lnkImprint" href="/impressum/">Impressum</a>
+    <a id="lnkPrivacy" href="/datenschutz/">Datenschutz</a>
+    <span class="lang" role="group" aria-label="Language">
+      <button type="button" data-lang="de" aria-pressed="true">DE</button><button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </span>
+  </div>
+</nav>
+
+<main class="wrap main">
+  <header class="head">
+    <p class="cmd"><span class="ps">$</span> <span data-i18n="cmd">kuendigung --schreiben</span></p>
+    <h1 data-i18n="h1">Kündigung schreiben, mit der richtigen Frist</h1>
+    <p class="lead" data-i18n="lead">Vertrag wählen, Daten eintragen: Sie bekommen das passende Kündigungsschreiben, das Datum, an dem der Vertrag endet, und bis wann die Kündigung ankommen muss.</p>
+    <a class="jump" href="#result" data-i18n="jump">↓ Zum fertigen Schreiben</a>
+  </header>
+
+  <div class="grid">
+    <form class="panel qs" id="f" autocomplete="on" onsubmit="return false">
+
+      <fieldset class="q">
+        <legend><span class="flag">--vertrag</span> <span data-i18n="q_cat">Was möchten Sie kündigen?</span></legend>
+        <div class="opts opts--cats" id="cats"></div>
+      </fieldset>
+
+      <fieldset class="q">
+        <legend><span class="flag">--art</span> <span data-i18n="q_kind">Art der Kündigung</span></legend>
+        <div class="opts opts--col" id="kinds"></div>
+        <p class="hint" id="kindHint"></p>
+      </fieldset>
+
+      <fieldset class="q">
+        <legend><span class="flag">--anbieter</span> <span data-i18n="q_provider">Vertrag und Anbieter</span></legend>
+        <label class="field"><span class="lbl" data-i18n="l_provider">Anschrift des Anbieters</span>
+          <textarea name="provider" rows="4" autocomplete="off" data-i18n-ph="ph_provider" placeholder="Firma GmbH&#10;Kündigungsabteilung&#10;Straße 1&#10;12345 Stadt"></textarea>
+          <span class="hint" data-i18n="h_provider">Steht im Vertrag, auf der Rechnung oder im Impressum der Website. Bitte selbst prüfen: das Tool hat keine Adressdatenbank.</span>
+        </label>
+        <div class="row2">
+          <label class="field"><span class="lbl" id="lblNr" data-i18n="l_nr">Kundennummer</span><input type="text" name="nr" autocomplete="off"></label>
+          <label class="field"><span class="lbl" data-i18n="l_product">Tarif oder Bezeichnung (optional)</span><input type="text" name="product" autocomplete="off"></label>
+        </div>
+        <div class="row2">
+          <label class="field" data-show="mobil"><span class="lbl" data-i18n="l_phone">Rufnummer</span><input type="tel" name="phone" autocomplete="off"></label>
+          <label class="field" data-show="energie"><span class="lbl" data-i18n="l_meter">Zählernummer</span><input type="text" name="meter" autocomplete="off"></label>
+        </div>
+        <label class="check" data-show="energie"><input type="checkbox" name="grund"><span data-i18n="l_grund">Grundversorgung (Standardtarif des örtlichen Versorgers, kein Sondervertrag)</span></label>
+      </fieldset>
+
+      <fieldset class="q" id="termBox">
+        <legend><span class="flag">--laufzeit</span> <span data-i18n="q_term">Laufzeit und Kündigungsfrist laut Vertrag</span></legend>
+        <div class="row2">
+          <label class="field"><span class="lbl" id="lblStart" data-i18n="l_start">Vertragsbeginn</span><input type="date" name="start"></label>
+          <label class="field" data-hide-rule="verein grund"><span class="lbl" id="lblMin" data-i18n="l_min">Mindestlaufzeit (Monate)</span><input type="number" name="minTerm" min="0" max="120" step="1" inputmode="numeric"></label>
+        </div>
+        <div class="row2" data-hide-rule="grund">
+          <label class="field"><span class="lbl" data-i18n="l_notice">Kündigungsfrist</span>
+            <span class="pair"><input type="number" name="noticeN" min="0" max="36" step="1" inputmode="numeric">
+            <select name="noticeU"><option value="d" data-i18n="u_d">Tage</option><option value="w" data-i18n="u_w">Wochen</option><option value="m" data-i18n="u_m">Monate</option></select></span>
+          </label>
+          <label class="field" id="extField"><span class="lbl" data-i18n="l_ext">Verlängert sich um (Monate)</span><input type="number" name="ext" min="0" max="24" step="1" inputmode="numeric"></label>
+        </div>
+        <div data-show-rule="verein">
+          <label class="check"><input type="checkbox" name="fyOnly"><span data-i18n="l_fyonly">Austritt laut Satzung nur zum Ende des Geschäftsjahres</span></label>
+          <label class="field" id="fyField"><span class="lbl" data-i18n="l_fyend">Geschäftsjahr endet im</span><select name="fyEnd" id="fyEnd"></select></label>
+        </div>
+        <p class="hint" id="termHint"></p>
+      </fieldset>
+
+      <fieldset class="q" id="extraBox">
+        <legend><span class="flag">--details</span> <span data-i18n="q_extra">Angaben zum Kündigungsgrund</span></legend>
+        <div class="row2" data-kind="preis">
+          <label class="field"><span class="lbl" data-i18n="l_pnotice">Mitteilung erhalten am</span><input type="date" name="priceNotice"></label>
+          <label class="field"><span class="lbl" data-i18n="l_pdate">Preiserhöhung gilt ab</span><input type="date" name="priceDate"></label>
+        </div>
+        <div data-kind="umzug">
+          <label class="field"><span class="lbl" data-i18n="l_move">Umzugstag (Auszug)</span><input type="date" name="moveDate"></label>
+          <label class="field"><span class="lbl" data-i18n="l_newaddr">Neue Anschrift</span><textarea name="newAddress" rows="2" autocomplete="off"></textarea></label>
+          <label class="field" data-show="energie"><span class="lbl" data-i18n="l_newmeter">Neue Marktlokations- oder Zählernummer (optional)</span><input type="text" name="newMeter" autocomplete="off"></label>
+        </div>
+        <div data-kind="schaden">
+          <label class="field"><span class="lbl" data-i18n="l_claim">Schaden reguliert oder abgelehnt am</span><input type="date" name="claimDate"></label>
+        </div>
+        <div data-kind="wichtig speed schaden">
+          <label class="field"><span class="lbl" id="lblReason" data-i18n="l_reason">Grund (kurz)</span><textarea name="reason" rows="2" autocomplete="off"></textarea></label>
+        </div>
+        <label class="check" data-kind="wichtig"><input type="checkbox" name="proof"><span data-i18n="l_proof">Ich lege einen Nachweis bei (z. B. ärztliches Attest)</span></label>
+      </fieldset>
+
+      <fieldset class="q">
+        <legend><span class="flag">--absender</span> <span data-i18n="q_sender">Ihre Angaben</span></legend>
+        <div class="row2">
+          <label class="field"><span class="lbl" data-i18n="l_name">Vor- und Nachname</span><input type="text" name="name" autocomplete="name"></label>
+          <label class="field"><span class="lbl" data-i18n="l_email">E-Mail (optional)</span><input type="email" name="email" autocomplete="email"></label>
+        </div>
+        <label class="field"><span class="lbl" data-i18n="l_address">Ihre Anschrift</span><textarea name="address" rows="2" autocomplete="street-address" data-i18n-ph="ph_address" placeholder="Straße 1&#10;12345 Stadt"></textarea></label>
+        <label class="field"><span class="lbl" data-i18n="l_place">Ort (für die Datumszeile)</span><input type="text" name="place" autocomplete="address-level2"></label>
+      </fieldset>
+
+      <fieldset class="q">
+        <legend><span class="flag">--versand</span> <span data-i18n="q_send">Wie und wann senden Sie die Kündigung?</span></legend>
+        <div class="opts" id="methods"></div>
+        <label class="field field--short"><span class="lbl" data-i18n="l_send">Absendedatum</span><input type="date" name="send"></label>
+      </fieldset>
+
+      <fieldset class="q">
+        <legend><span class="flag">--optionen</span> <span data-i18n="q_opts">Zusätze im Schreiben</span></legend>
+        <label class="check"><input type="checkbox" name="sepa"><span data-i18n="l_sepa">Lastschriftmandat zum Vertragsende widerrufen</span></label>
+        <label class="check"><input type="checkbox" name="noAds"><span data-i18n="l_noads">Werbung und Rückgewinnungsanrufe untersagen</span></label>
+        <label class="check" data-show="mobil"><input type="checkbox" name="port"><span data-i18n="l_port">Rufnummer zum neuen Anbieter mitnehmen</span></label>
+      </fieldset>
+
+      <div class="qs__foot">
+        <label class="check check--small"><input type="checkbox" id="remember"><span data-i18n="l_remember">Meine Angaben auf diesem Gerät speichern</span></label>
+        <button type="button" class="linkish" id="resetBtn" data-i18n="reset">Alles löschen</button>
+      </div>
+    </form>
+
+    <section class="panel result" id="result" aria-live="polite">
+      <p class="result__title"><span class="ps">&gt;</span> <span data-i18n="result">Ihr Ergebnis</span></p>
+      <div id="summary"></div>
+      <div class="actions">
+        <button type="button" class="btn btn--main" id="printBtn" data-i18n="print">Drucken oder als PDF speichern</button>
+        <button type="button" class="btn btn--line" id="copyBtn" data-i18n="copy">Als E-Mail kopieren</button>
+        <a class="btn btn--line" id="mailBtn" href="#" data-i18n="mail">Im Mailprogramm öffnen</a>
+        <span class="dim small" id="actMsg" role="status"></span>
+      </div>
+      <p class="small" id="langNote" hidden></p>
+      <article class="letter" id="letter" aria-label="Kündigungsschreiben"></article>
+      <div id="howto"></div>
+      <p class="small upd"><a id="updLink" href="/de/?topic=kuendigung#contact" data-i18n="upd">Neuigkeiten zu diesem Tool erhalten &rarr;</a> <span data-i18n="upd_d">Ich melde mich, wenn neue Vorlagen oder Tools dazukommen.</span></p>
+    </section>
+  </div>
+
+  <section class="sources">
+    <p class="cmd"><span class="ps">$</span> <span data-i18n="sources_cmd">cat quellen.txt</span></p>
+    <ul id="sourcesList"></ul>
+    <p class="note" id="note"></p>
+  </section>
+</main>
+
+<footer class="wrap foot">
+  <p data-i18n="privacy_line">Läuft in Ihrem Browser. Keine Cookies, kein Tracking, nichts wird an einen Server gesendet. Wenn Sie es erlauben, bleiben Ihre Angaben im Speicher dieses Browsers (localStorage).</p>
+  <p><a href="selftest.html" data-i18n="selftest">Selbsttest der Fristberechnung</a></p>
+</footer>
+
+<script src="config.js"></script>
+<script src="logic.js"></script>
+<script src="i18n.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

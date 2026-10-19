@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kündigung: deadline self-test</title>
+<meta name="robots" content="noindex">
+<meta name="color-scheme" content="dark">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="app.css?v=1">
+</head>
+<body>
+<main class="wrap main">
+  <p class="cmd"><span class="ps">$</span> kuendigung --selftest</p>
+  <h1>Deadline self-test</h1>
+  <p class="lead">Fixed cases with hand-checked answers, run in your browser against the same code the tool uses. Legal basis as of <span id="asof"></span>.</p>
+  <p class="verdict" id="sum"></p>
+  <ul class="todo" id="out"></ul>
+  <p><a href="./">&larr; back to the tool</a></p>
+</main>
+<script src="logic.js"></script>
+<script src="selftest.js"></script>
+<script>
+(function () {
+  var res = KuendigungSelfTest.run(Kuendigung), ok = res.filter(function (r) { return r.ok; }).length;
+  document.getElementById('asof').textContent = Kuendigung.AS_OF;
+  document.getElementById('sum').textContent = ok + ' / ' + res.length + ' passed';
+  if (ok !== res.length) document.getElementById('sum').style.color = 'var(--accent)';
+  document.getElementById('out').innerHTML = res.map(function (r) {
+    var li = document.createElement('li');
+    li.textContent = (r.ok ? 'PASS  ' : 'FAIL  ') + r.name + (r.ok ? '' : ' (' + r.why + ')');
+    return li.outerHTML;
+  }).join('');
+})();
+</script>
+</body>
+</html>
