@@ -47,7 +47,7 @@ window.KUE_I18N = {
     privacy_line: 'Läuft in Ihrem Browser. Keine Cookies, kein Tracking, nichts wird an einen Server gesendet. Wenn Sie es erlauben, bleiben Ihre Angaben im Speicher dieses Browsers (localStorage).',
     selftest: 'Selbsttest der Fristberechnung',
     imprint: 'Impressum', imprint_href: '/impressum/', privacy: 'Datenschutz', privacy_href: '/datenschutz/',
-    home_href: '/de/tools/kuendigung/', upd_href: '/de/?topic=kuendigung#contact',
+    home_href: '/de/tools/kuendigung/', upd_href: '/de/newsletter/?topic=kuendigung',
     lang_note: '',
 
     cat_fitness: 'Fitnessstudio', cat_mobil: 'Handy / Mobilfunk', cat_internet: 'Internet / DSL', cat_versicherung: 'Versicherung',
@@ -168,7 +168,7 @@ window.KUE_I18N = {
     privacy_line: 'Runs in your browser. No cookies, no tracking, nothing is sent to a server. If you allow it, your details stay in this browser\'s storage (localStorage).',
     selftest: 'Self-test of the deadline calculation',
     imprint: 'Imprint', imprint_href: '/imprint/', privacy: 'Privacy', privacy_href: '/privacy/',
-    home_href: '/tools/kuendigung/', upd_href: '/?topic=kuendigung#contact',
+    home_href: '/tools/kuendigung/', upd_href: '/subscribe/?topic=kuendigung',
     lang_note: 'The letter is in German, because German providers expect it. The page explains each step in English.',
 
     cat_fitness: 'Gym', cat_mobil: 'Mobile phone', cat_internet: 'Internet / DSL', cat_versicherung: 'Insurance',
