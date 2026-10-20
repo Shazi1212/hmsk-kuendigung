@@ -40,9 +40,9 @@
   }
   function chip(iso) {
     var n = daysUntil(iso);
-    if (n < 0) return ' <span class="chip">[' + esc(t('chip_past')) + ']</span>';
-    if (n === 0) return ' <span class="chip chip--on">[' + esc(t('chip_today')) + ']</span>';
-    return ' <span class="chip' + (n <= 14 ? ' chip--on' : '') + '">[' + esc(t('chip_days', { n: n })) + ']</span>';
+    if (n < 0) return ' <span class="chip">' + esc(t('chip_past')) + '</span>';
+    if (n === 0) return ' <span class="chip chip--on">' + esc(t('chip_today')) + '</span>';
+    return ' <span class="chip' + (n <= 14 ? ' chip--on' : '') + '">' + esc(t('chip_days', { n: n })) + '</span>';
   }
   function val(name) { var el = form.elements[name]; return el ? (el.type === 'checkbox' ? el.checked : el.value) : ''; }
   function setVal(name, v) {
@@ -204,7 +204,7 @@
     if (r.method === 'einschreiben' || r.method === 'brief' || r.method === 'fax') items.push('how_sign');
     if (r.method !== 'button' && inp.cat !== 'verein' && inp.cat !== 'versicherung') items.push('how_button');
     if (['verein', 'versicherung', 'streaming'].indexOf(inp.cat) >= 0) items.push('how_' + inp.cat);
-    $('#howto').innerHTML = '<div class="howto"><h2 class="h2"><span class="ps">#</span> ' + esc(t('how_title')) + '</h2><ul>' +
+    $('#howto').innerHTML = '<div class="howto"><h2 class="h2">' + esc(t('how_title')) + '</h2><ul>' +
       items.filter(function (k, i) { return items.indexOf(k) === i; }).map(function (k) { return '<li>' + esc(t(k)) + '</li>'; }).join('') + '</ul></div>';
   }
   function renderSources(r) {
